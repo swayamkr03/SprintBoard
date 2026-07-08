@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using SprintBoard.Data;
 using System.Text.Json.Serialization;
+using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,20 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var connectionString = dbContext.Database.GetConnectionString();
+
+    if (!string.IsNullOrWhiteSpace(connectionString))
+    {
+        var sqliteBuilder = new SqliteConnectionStringBuilder(connectionString);
+        var dataSource = sqliteBuilder.DataSource;
+        var databaseDirectory = Path.GetDirectoryName(dataSource);
+
+        if (!string.IsNullOrWhiteSpace(databaseDirectory))
+        {
+            Directory.CreateDirectory(databaseDirectory);
+        }
+    }
+
     dbContext.Database.Migrate();
 }
 
