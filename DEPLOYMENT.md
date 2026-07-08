@@ -22,7 +22,7 @@ VITE_API_BASE_URL=http://localhost:5063
 For production, set it to the deployed API URL, for example:
 
 ```text
-VITE_API_BASE_URL=https://your-api-host.example.com
+VITE_API_BASE_URL=https://sprintboard-api-swayamkr03.onrender.com
 ```
 
 ## Frontend Build
@@ -69,6 +69,12 @@ The frontend is configured with:
 
 ```text
 VITE_API_BASE_URL=https://sprintboard-api-swayamkr03.onrender.com
+```
+
+Current live backend:
+
+```text
+https://sprintboard-api-swayamkr03.onrender.com
 ```
 
 If Render changes the API service URL because the name is unavailable, update the frontend service environment variable to match the actual API URL and redeploy the frontend.

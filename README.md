@@ -2,6 +2,12 @@
 
 SprintBoard is a full-stack issue tracking application built with React and ASP.NET Core Web API. It helps teams create projects, assign issues, track status and priority, and discuss work through comments.
 
+## Live Links
+
+- Backend API: https://sprintboard-api-swayamkr03.onrender.com
+- Dashboard endpoint: https://sprintboard-api-swayamkr03.onrender.com/api/dashboard/summary
+- Frontend: deployment pending
+
 ## Features
 
 - Dashboard summary for projects, issues, users, comments, and issue status counts
@@ -45,7 +51,11 @@ The backend will print a URL like:
 http://localhost:5063
 ```
 
-Use that URL as `API_BASE_URL` in `frontend/src/App.jsx`.
+Use that URL as `VITE_API_BASE_URL` for the frontend. The deployed API currently runs at:
+
+```text
+https://sprintboard-api-swayamkr03.onrender.com
+```
 
 ## Frontend Setup
 
