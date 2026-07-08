@@ -77,6 +77,12 @@ Current live backend:
 https://sprintboard-api-swayamkr03.onrender.com
 ```
 
+Current live frontend:
+
+```text
+https://sprintboard-web-swayamkr03.onrender.com
+```
+
 If Render changes the API service URL because the name is unavailable, update the frontend service environment variable to match the actual API URL and redeploy the frontend.
 
 ## Production Database Note

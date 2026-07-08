@@ -6,7 +6,7 @@ SprintBoard is a full-stack issue tracking application built with React and ASP.
 
 - Backend API: https://sprintboard-api-swayamkr03.onrender.com
 - Dashboard endpoint: https://sprintboard-api-swayamkr03.onrender.com/api/dashboard/summary
-- Frontend: deployment pending
+- Frontend: https://sprintboard-web-swayamkr03.onrender.com
 
 ## Features
 
