@@ -12,7 +12,7 @@ namespace SprintBoard.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "projects",
+                name: "Projects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -23,7 +23,7 @@ namespace SprintBoard.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_projects", x => x.Id);
+                    table.PrimaryKey("PK_Projects", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,9 +65,9 @@ namespace SprintBoard.Api.Migrations
                         principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProjectIssues_projects_ProjectId",
+                        name: "FK_ProjectIssues_Projects_ProjectId",
                         column: x => x.ProjectId,
-                        principalTable: "projects",
+                        principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -134,7 +134,7 @@ namespace SprintBoard.Api.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "projects");
+                name: "Projects");
         }
     }
 }
