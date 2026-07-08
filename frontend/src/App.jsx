@@ -594,72 +594,128 @@ function App() {
     });
   }
 
+  const totalLoadedIssues = Object.values(issuesByProject).reduce(
+    (count, issues) => count + issues.length,
+    0
+  );
+
   return (
-    <div className="app-shell">
-      <header className="page-header">
-        <div>
-          <p className="eyebrow">Issue Tracker</p>
-          <h1>SprintBoard</h1>
+    <div className="blueprint-shell">
+      <header className="topbar">
+        <div className="brand-lockup">
+          <span className="brand-mark">SB</span>
+          <span className="brand-name">SPRINTBOARD_CORE</span>
         </div>
-        <p className="header-copy">
-          Track projects, assign issues, and keep delivery status visible.
-        </p>
+
+        <nav className="topnav" aria-label="Primary navigation">
+          <a href="#dashboard">Dashboard</a>
+          <a href="#projects">Issues</a>
+          <a href="#team">Team</a>
+        </nav>
+
+        <div className="topbar-actions">
+          <span className="session-pill">API: {API_BASE_URL.replace(/^https?:\/\//, "")}</span>
+          <span className="avatar-chip">S</span>
+        </div>
       </header>
 
-      {error && <p className="error-banner">{error}</p>}
+      <aside className="sidebar">
+        <div className="sidebar-card">
+          <span className="terminal-icon">▣</span>
+          <div>
+            <strong>PROJECT_MGMT</strong>
+            <small>v2.0-live</small>
+          </div>
+        </div>
 
-      <Dashboard summary={summary} />
+        <nav className="side-nav" aria-label="Workspace navigation">
+          <a href="#dashboard" className="active">◈ Metrics</a>
+          <a href="#create">▦ Create</a>
+          <a href="#team">◎ Team</a>
+          <a href="#projects">☷ Log Tracker</a>
+        </nav>
 
-      <div className="form-layout">
-        <ProjectForm
-          projectForm={projectForm}
-          onChange={handleProjectChange}
-          onSubmit={handleProjectSubmit}
-          isEditing={editingProjectId !== null}
-          onCancel={cancelProjectEdit}
-        />
+        <div className="sidebar-footer">
+          <span>LOADED_ISSUES</span>
+          <strong>{totalLoadedIssues}</strong>
+        </div>
+      </aside>
 
-        <UserForm
-          userForm={userForm}
-          onChange={handleUserChange}
-          onSubmit={handleUserSubmit}
-          isEditing={editingUserId !== null}
-          onCancel={cancelUserEdit}
-        />
+      <main className="workspace">
+        <header className="workspace-header">
+          <div>
+            <p className="eyebrow">Issue Tracker</p>
+            <h1>SprintBoard</h1>
+            <p className="header-copy">
+              Track projects, assign issues, and keep delivery status visible.
+            </p>
+          </div>
+          <div className="header-actions">
+            <button type="button" onClick={loadInitialData}>Refresh Data</button>
+            <a className="primary-link" href="#create">+ New Initiative</a>
+          </div>
+        </header>
 
-        <IssueForm
-          issueForm={issueForm}
-          projects={projects}
-          users={users}
-          onChange={handleIssueChange}
-          onSubmit={handleIssueSubmit}
-          isEditing={editingIssueId !== null}
-          onCancel={cancelIssueEdit}
-        />
-      </div>
+        {error && <p className="error-banner">{error}</p>}
 
-      <UsersList users={users} onEdit={editUser} onDelete={deleteUser} />
+        <div id="dashboard">
+          <Dashboard summary={summary} />
+        </div>
 
-      <ProjectsIssuesList
-        projects={projects}
-        issuesByProject={issuesByProject}
-        commentsByIssue={commentsByIssue}
-        commentForms={commentForms}
-        users={users}
-        filters={filters}
-        loading={loading}
-        getUserName={getUserName}
-        getVisibleIssues={getVisibleIssues}
-        onFilterChange={handleFilterChange}
-        onEditProject={editProject}
-        onDeleteProject={deleteProject}
-        onEditIssue={editIssue}
-        onUpdateIssue={updateIssue}
-        onDeleteIssue={deleteIssue}
-        onCommentChange={handleCommentChange}
-        onCommentSubmit={handleCommentSubmit}
-        onDeleteComment={deleteComment}
-      />
+        <div className="content-grid" id="create">
+          <ProjectForm
+            projectForm={projectForm}
+            onChange={handleProjectChange}
+            onSubmit={handleProjectSubmit}
+            isEditing={editingProjectId !== null}
+            onCancel={cancelProjectEdit}
+          />
+
+          <UserForm
+            userForm={userForm}
+            onChange={handleUserChange}
+            onSubmit={handleUserSubmit}
+            isEditing={editingUserId !== null}
+            onCancel={cancelUserEdit}
+          />
+
+          <IssueForm
+            issueForm={issueForm}
+            projects={projects}
+            users={users}
+            onChange={handleIssueChange}
+            onSubmit={handleIssueSubmit}
+            isEditing={editingIssueId !== null}
+            onCancel={cancelIssueEdit}
+          />
+        </div>
+
+        <div id="team">
+          <UsersList users={users} onEdit={editUser} onDelete={deleteUser} />
+        </div>
+
+        <div id="projects">
+          <ProjectsIssuesList
+            projects={projects}
+            commentsByIssue={commentsByIssue}
+            commentForms={commentForms}
+            users={users}
+            filters={filters}
+            loading={loading}
+            getUserName={getUserName}
+            getVisibleIssues={getVisibleIssues}
+            onFilterChange={handleFilterChange}
+            onEditProject={editProject}
+            onDeleteProject={deleteProject}
+            onEditIssue={editIssue}
+            onUpdateIssue={updateIssue}
+            onDeleteIssue={deleteIssue}
+            onCommentChange={handleCommentChange}
+            onCommentSubmit={handleCommentSubmit}
+            onDeleteComment={deleteComment}
+          />
+        </div>
+      </main>
     </div>
   );
 }

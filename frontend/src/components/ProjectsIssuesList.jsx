@@ -1,6 +1,5 @@
 function ProjectsIssuesList({
   projects,
-  issuesByProject,
   commentsByIssue,
   commentForms,
   users,
