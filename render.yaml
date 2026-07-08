@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: sprintboard-api-swayamkr03
+    runtime: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /api/dashboard/summary
+    disk:
+      name: sprintboard-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        value: Data Source=/var/data/sprintboard.db
+
+  - type: web
+    name: sprintboard-web-swayamkr03
+    runtime: static
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://sprintboard-api-swayamkr03.onrender.com
